@@ -72,6 +72,14 @@ int main(int argc,char *argv[])
   uint16_t res;
   res = cc_getChipID();
   printf("  ID = %04x.\n",res);
+
+  uint8_t status = cc_getStatus();
+  printf("  DEBUG status = %u\n", status);
+
+  if ((status & 0b00000100) == 0b00000100) {
+    printf("  DEBUG LOCK (bit 2 is high)");
+  }
+
   cc_setActive(false);
   // reboot
   cc_reset();
